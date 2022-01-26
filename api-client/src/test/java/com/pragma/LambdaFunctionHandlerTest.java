@@ -32,7 +32,7 @@ public class LambdaFunctionHandlerTest {
 
     @Test
     public void testLambdaFunctionHandler() {
-        LambdaFunctionHandler handler = new LambdaFunctionHandler();
+        Handler handler = new Handler();
         Context ctx = createContext();
 
         String output = handler.handleRequest(input, ctx);
