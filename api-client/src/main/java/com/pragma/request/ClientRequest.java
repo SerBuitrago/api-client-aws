@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 public class ClientRequest {
 	
-	private int id;
+	private Long id;
     private String httpMethod;
     private Client client;
 }
