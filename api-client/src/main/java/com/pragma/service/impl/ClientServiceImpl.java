@@ -7,12 +7,12 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
 import com.pragma.model.Client;
 import com.pragma.service.IClientService;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class ClientServiceImpl implements IClientService{
 
-	private DynamoDBMapper mapper;
+	private final DynamoDBMapper mapper;
 	
 	@Override
 	public Client findById(Long id) {
