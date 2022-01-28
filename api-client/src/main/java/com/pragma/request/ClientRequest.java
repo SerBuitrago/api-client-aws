@@ -1,6 +1,6 @@
 package com.pragma.request;
 
-import com.pragma.model.entity.Client;
+import com.pragma.model.dto.ClientDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,5 +13,5 @@ public class ClientRequest {
 	
 	private Long id;
     private String httpMethod;
-    private Client client;
+    private ClientDTO client;
 }

@@ -5,6 +5,8 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
+import com.pragma.mapper.IClientMapper;
+import com.pragma.mapper.impl.ClientMapperImpl;
 import com.pragma.request.ClientRequest;
 import com.pragma.service.IClientService;
 import com.pragma.service.impl.ClientServiceImpl;
@@ -23,7 +25,9 @@ public class Handler implements RequestHandler<ClientRequest, Object> {
 	public Object handleRequest(ClientRequest request, Context context) {
 		db = AmazonDynamoDBClientBuilder.defaultClient();
 		mapper = new DynamoDBMapper(db);
-		IClientService clientService = new ClientServiceImpl(mapper);
+		
+		IClientMapper clientMapper = new ClientMapperImpl();
+		IClientService clientService = new ClientServiceImpl(mapper, clientMapper);
 
 		switch (request.getHttpMethod()) {
 		case "GET":

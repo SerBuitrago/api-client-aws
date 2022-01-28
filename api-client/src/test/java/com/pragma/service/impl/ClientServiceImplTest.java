@@ -23,6 +23,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
 import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedScanList;
+import com.pragma.mapper.impl.ClientMapperImpl;
+import com.pragma.model.dto.ClientDTO;
 import com.pragma.model.entity.Client;
 
 import static com.pragma.Data.CLIENT;
@@ -34,10 +36,13 @@ public class ClientServiceImplTest {
 	@Mock
 	DynamoDBMapper mapper;
 	@Mock
-	PaginatedScanList<Client> scanResult;
+	PaginatedScanList<ClientDTO> scanResult;
 	
 	@Mock
 	DynamoDBScanExpression scan;
+	
+	@Mock
+	ClientMapperImpl clientMapperImpl;
 	
 	@InjectMocks
 	ClientServiceImpl service;
@@ -53,7 +58,7 @@ public class ClientServiceImplTest {
 		void findById() {
 			when(mapper.load(Client.class, 1L)).thenReturn(CLIENT);
 			
-			Client client = service.findById(1L);
+			ClientDTO client = service.findById(1L);
 			
 			assertEquals(CLIENT.getId(), client.getId());
 			assertEquals(CLIENT, client);
@@ -80,7 +85,7 @@ public class ClientServiceImplTest {
 			
 			when(mapper.scan(Client.class, scan)).thenReturn(scanResult);
 			
-			List<Client> list = service.findAll();
+			List<ClientDTO> list = service.findAll();
 			
 			assertEquals(LIST_CLIENTS.size(), list.size());
 			
@@ -99,7 +104,7 @@ public class ClientServiceImplTest {
 		void save() {
 			doNothing().when(mapper).save(CLIENT);
 			
-			Client client = service.save(CLIENT);
+			ClientDTO client = service.save(CLIENT);
 			
 			assertEquals(CLIENT.getId(), client.getId());
 			
@@ -117,7 +122,7 @@ public class ClientServiceImplTest {
 			when(mapper.load(Client.class, 1L)).thenReturn(CLIENT);
 			doNothing().when(mapper).delete(CLIENT);
 			
-			Client client = service.deleteById(1L);
+			ClientDTO client = service.deleteById(1L);
 			
 			assertEquals(CLIENT.getId(), client.getId());
 			

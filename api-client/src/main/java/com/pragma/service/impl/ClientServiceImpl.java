@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
+import com.pragma.mapper.IClientMapper;
+import com.pragma.model.dto.ClientDTO;
 import com.pragma.model.entity.Client;
 import com.pragma.service.IClientService;
 
@@ -13,28 +15,30 @@ import lombok.RequiredArgsConstructor;
 public class ClientServiceImpl implements IClientService{
 
 	private final DynamoDBMapper mapper;
+	private final IClientMapper iClientMapper;
 	
 	@Override
-	public Client findById(Long id) {
-		return mapper.load(Client.class, id);
+	public ClientDTO findById(Long id) {
+		
+		return iClientMapper.toDto(mapper.load(Client.class, id));
 	}
 	
 	@Override
-	public List<Client> findAll(){
-		return mapper.scan(Client.class, new DynamoDBScanExpression());
+	public List<ClientDTO> findAll(){
+		return iClientMapper.toDtoList(mapper.scan(Client.class, new DynamoDBScanExpression()));
 	} 
 	
 	@Override
-	public Client save(Client client) {
-		mapper.save(client);
+	public ClientDTO save(ClientDTO client) {
+		mapper.save(iClientMapper.toEntity(client));
 		return client;
 	}
 	
 	@Override
-	public Client deleteById(Long id) {
-		Client client = mapper.load(Client.class, id);
+	public ClientDTO deleteById(Long id) {
+		ClientDTO client = findById(id);
 		if (client != null)
-			mapper.delete(client);
+			mapper.delete(iClientMapper.toEntity(client));
 		return client;
 	}
 }

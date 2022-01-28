@@ -14,7 +14,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.pragma.model.entity.Client;
 
-import static com.pragma.Data.CLIENT;
+import static com.pragma.Data.CLIENT_ENTITY;
 
 @ExtendWith(MockitoExtension.class)
 public class ClientTest {
@@ -23,7 +23,7 @@ public class ClientTest {
 	
 	@BeforeEach 
 	void before() {
-		client = CLIENT;
+		client = CLIENT_ENTITY;
 	}
 	
 	@Tag("id")

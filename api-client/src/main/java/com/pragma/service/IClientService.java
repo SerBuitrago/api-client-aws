@@ -2,15 +2,15 @@ package com.pragma.service;
 
 import java.util.List;
 
-import com.pragma.model.entity.Client;
+import com.pragma.model.dto.ClientDTO;
 
 public interface IClientService {
 	
-	Client findById(Long id);
+	ClientDTO findById(Long id);
 	
-	List<Client> findAll();
+	List<ClientDTO> findAll();
 	
-	Client save(Client client);
+	ClientDTO save(ClientDTO client);
 	
-	Client deleteById(Long id);
+	ClientDTO deleteById(Long id);
 }
