@@ -9,8 +9,11 @@ import com.pragma.request.ClientRequest;
 import com.pragma.service.IClientService;
 import com.pragma.service.impl.ClientServiceImpl;
 
+import lombok.Generated;
+
 import static com.pragma.util.Pragma.isLong;
 
+@Generated
 public class Handler implements RequestHandler<ClientRequest, Object> {
 
 	private AmazonDynamoDB db;

@@ -19,7 +19,7 @@ public class ClientTest {
 	
 	Client client;
 	
-	@BeforeEach
+	@BeforeEach 
 	void before() {
 		client = CLIENT;
 	}

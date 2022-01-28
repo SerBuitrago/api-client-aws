@@ -4,10 +4,13 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.pragma.model.Client;
+import com.pragma.request.ClientRequest;
 
 public class Data {
 	public static final Client CLIENT = new Client(1L, "Sergio Stives", "Barrios Buitrago", "CC", 1010058716L, 21,
 			"Cali");
+	
+	public static final ClientRequest CLIENT_REQUEST = new ClientRequest(1L, "GET", CLIENT);
 
 	public static final List<Client> LIST_CLIENTS = Arrays.asList(CLIENT,
 			new Client(1L, "Jhonatan Javier", "Barrios Buitrago", "CC", 10100232L, 22, "Bucaramanga"),

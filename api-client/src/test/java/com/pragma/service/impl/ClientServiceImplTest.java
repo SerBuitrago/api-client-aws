@@ -47,7 +47,7 @@ public class ClientServiceImplTest {
 	@Nested
 	@DisplayName("Clase que permite consultar por un condicion y trae un resultado.")
 	class ClientServiceImplTestFindBy{
-		
+		 
 		@Test
 		@DisplayName("Consultar por el id.")
 		void findById() {
