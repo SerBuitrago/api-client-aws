@@ -23,7 +23,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
 import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedScanList;
-import com.pragma.model.Client;
+import com.pragma.model.entity.Client;
 
 import static com.pragma.Data.CLIENT;
 import static com.pragma.Data.LIST_CLIENTS;

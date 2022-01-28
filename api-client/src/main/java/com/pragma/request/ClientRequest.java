@@ -1,6 +1,6 @@
 package com.pragma.request;
 
-import com.pragma.model.Client;
+import com.pragma.model.entity.Client;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
-import com.pragma.model.Client;
+import com.pragma.model.entity.Client;
 import com.pragma.service.IClientService;
 
 import lombok.RequiredArgsConstructor;

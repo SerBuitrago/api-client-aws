@@ -12,6 +12,8 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import com.pragma.model.entity.Client;
+
 import static com.pragma.Data.CLIENT;
 
 @ExtendWith(MockitoExtension.class)

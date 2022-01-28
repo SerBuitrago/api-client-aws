@@ -3,7 +3,7 @@ package com.pragma;
 import java.util.Arrays;
 import java.util.List;
 
-import com.pragma.model.Client;
+import com.pragma.model.entity.Client;
 import com.pragma.request.ClientRequest;
 
 public class Data {
