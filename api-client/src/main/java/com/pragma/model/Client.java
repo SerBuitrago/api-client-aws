@@ -6,9 +6,11 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Generated;
 
 @Data
 @AllArgsConstructor
+@Generated
 @DynamoDBTable(tableName = "client")
 public class Client {
 

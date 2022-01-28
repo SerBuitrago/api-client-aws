@@ -22,7 +22,7 @@ public class ClientServiceImpl implements IClientService{
 	@Override
 	public List<Client> findAll(){
 		return mapper.scan(Client.class, new DynamoDBScanExpression());
-	}
+	} 
 	
 	@Override
 	public Client save(Client client) {

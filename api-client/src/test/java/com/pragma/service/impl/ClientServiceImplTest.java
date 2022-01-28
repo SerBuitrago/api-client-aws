@@ -1,11 +1,10 @@
 package com.pragma.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.timeout;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
-import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -17,7 +16,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression; 
 import com.pragma.model.Client;
 
 import static com.pragma.Data.CLIENT;
@@ -57,15 +56,30 @@ public class ClientServiceImplTest {
 	@Tag("get")
 	@Tag("findAll")
 	@Nested
-	@DisplayName("lase que permite consultar por un condicion y trae varios resultados.")
+	@DisplayName("Clase que permite consultar por un condicion y trae varios resultados.")
 	class ClientServiceImplTestFindAll{
 		
 		@Test
 		@DisplayName("Consultar por todos los usuarios.")
 		void findAll() {
-			when(mapper.scan(Client.class, scan)).thenReturn(null);
+			when(mapper.scan(Client.class, new DynamoDBScanExpression())).thenReturn(null);
 			
-			verify(mapper, timeout(1)).scan(Client.class, scan);
+			service.findAll();
+			
+			verify(mapper, never()).scan(Client.class, scan);
+		}
+	}
+	
+	@Tag("post")
+	@Tag("save")
+	@Nested
+	@DisplayName("Clase que permite registrar cliente.")
+	class ClientServiceImplTestSave{
+		
+		@Test
+		@DisplayName("Premite registrar un cliente.")
+		void save() {
+			verify(mapper, never()).save(CLIENT);
 		}
 	}
 }
