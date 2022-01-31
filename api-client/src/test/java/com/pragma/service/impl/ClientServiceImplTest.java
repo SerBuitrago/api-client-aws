@@ -1,6 +1,7 @@
 package com.pragma.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.timeout;
@@ -23,12 +24,15 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
 import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedScanList;
+import com.pragma.mapper.IClientMapper;
 import com.pragma.mapper.impl.ClientMapperImpl;
 import com.pragma.model.dto.ClientDTO;
 import com.pragma.model.entity.Client;
 
 import static com.pragma.Data.CLIENT;
+import static com.pragma.Data.CLIENT_ENTITY;
 import static com.pragma.Data.LIST_CLIENTS;
+import static com.pragma.Data.LIST_CLIENTS_ENTITY;
 
 @ExtendWith(MockitoExtension.class)
 public class ClientServiceImplTest {
@@ -36,16 +40,22 @@ public class ClientServiceImplTest {
 	@Mock
 	DynamoDBMapper mapper;
 	@Mock
-	PaginatedScanList<ClientDTO> scanResult;
+	PaginatedScanList<Client> scanResult;
 	
 	@Mock
 	DynamoDBScanExpression scan;
 	
 	@Mock
-	ClientMapperImpl clientMapperImpl;
+	IClientMapper clientMapperImpl;
 	
 	@InjectMocks
 	ClientServiceImpl service;
+	
+	@BeforeEach
+	void before() {
+		clientMapperImpl = new ClientMapperImpl();
+		service = new ClientServiceImpl(mapper, clientMapperImpl);
+	}
 
 	@Tag("get")
 	@Tag("find")
@@ -56,10 +66,11 @@ public class ClientServiceImplTest {
 		@Test
 		@DisplayName("Consultar por el id.")
 		void findById() {
-			when(mapper.load(Client.class, 1L)).thenReturn(CLIENT);
-			
+			when(mapper.load(Client.class, 1L)).thenReturn(CLIENT_ENTITY);
+
 			ClientDTO client = service.findById(1L);
 			
+			assertNotNull(client);
 			assertEquals(CLIENT.getId(), client.getId());
 			assertEquals(CLIENT, client);
 			
@@ -75,7 +86,7 @@ public class ClientServiceImplTest {
 		
 		@BeforeEach
 		void before(){
-			scanResult.addAll(LIST_CLIENTS);
+			scanResult.addAll(LIST_CLIENTS_ENTITY);
 		}
 		
 		@Test
@@ -102,13 +113,14 @@ public class ClientServiceImplTest {
 		@Test
 		@DisplayName("Permite registrar un cliente.")
 		void save() {
-			doNothing().when(mapper).save(CLIENT);
+			doNothing().when(mapper).save(CLIENT_ENTITY);
 			
 			ClientDTO client = service.save(CLIENT);
 			
-			assertEquals(CLIENT.getId(), client.getId());
+			assertNotNull(client);
+			assertEquals(CLIENT_ENTITY.getId(), client.getId());
 			
-			verify(mapper).save(CLIENT);
+			verify(mapper).save(CLIENT_ENTITY);
 		}
 	}
 	
@@ -119,14 +131,15 @@ public class ClientServiceImplTest {
 		@Test
 		@DisplayName("Permite eliminar un cliente.")
 		void deleteById() {
-			when(mapper.load(Client.class, 1L)).thenReturn(CLIENT);
-			doNothing().when(mapper).delete(CLIENT);
+			when(mapper.load(Client.class, 1L)).thenReturn(CLIENT_ENTITY);
+			doNothing().when(mapper).delete(CLIENT_ENTITY);
 			
 			ClientDTO client = service.deleteById(1L);
 			
-			assertEquals(CLIENT.getId(), client.getId());
+			assertNotNull(client);
+			assertEquals(CLIENT_ENTITY.getId(), client.getId());
 			
-			verify(mapper).delete(CLIENT);
+			verify(mapper).delete(CLIENT_ENTITY);
 		}
 	}
 }

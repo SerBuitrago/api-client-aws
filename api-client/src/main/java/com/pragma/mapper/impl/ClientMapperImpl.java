@@ -8,7 +8,7 @@ import com.pragma.model.dto.ClientDTO;
 import com.pragma.model.entity.Client;
 
 public class ClientMapperImpl implements IClientMapper {
-
+	
 	@Override
 	public Client toEntity(ClientDTO clientDTO) {
 		if (clientDTO == null)

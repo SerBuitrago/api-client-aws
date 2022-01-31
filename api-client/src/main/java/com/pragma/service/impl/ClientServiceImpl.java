@@ -19,7 +19,6 @@ public class ClientServiceImpl implements IClientService{
 	
 	@Override
 	public ClientDTO findById(Long id) {
-		
 		return iClientMapper.toDto(mapper.load(Client.class, id));
 	}
 	
